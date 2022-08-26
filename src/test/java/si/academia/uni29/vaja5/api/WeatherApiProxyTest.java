@@ -22,10 +22,16 @@ public class WeatherApiProxyTest {
         Date xDaysAgo = Date.from( Instant.now().minus(Duration.ofDays(1)) );
         WeatherApiProxy proxy = new WeatherApiProxy("http://api.weatherapi.com/v1/", "3cc0e117d583487d94a84732210807");
         WeatherData wdata = proxy.getHistoricalData("Maribor", xDaysAgo);
+
         assertNotNull(wdata);
+        assertNotNull(wdata.getForecast().getForecastday()[0].getAstro().getSunrise());
+        assertNotNull(wdata.getForecast().getForecastday()[0].getHour()[0].getPressure_mb());
+        assertNotEquals(wdata.getLocation().getName(), "Los Angeles");  // 'Maribor' not equals to 'Los Angeles'
 
         System.out.println("\nGORAZD MURKO");
-        System.out.println(wdata.getForecast().getForecastday().getClass());
-        System.out.println(wdata.getLocation().getName());
+        System.out.println(wdata.getForecast().getForecastday()[0].getAstro().getSunrise());
+        // System.out.println(wdata.getCurrent().getTemp_c());
+        // System.out.println(wdata.getCurrent().getTemp_f());
+
     }
 }

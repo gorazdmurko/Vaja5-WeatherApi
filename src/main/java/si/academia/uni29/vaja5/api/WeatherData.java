@@ -10,6 +10,8 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WeatherData {
 
+    // inner classes
+    // 1. Condition
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class Condition {
         private String text;
@@ -26,15 +28,10 @@ public class WeatherData {
         }
 
         public String getText() { return text; }
-
         public void setText(String text) { this.text = text; }
-
         public String getIcon() { return icon; }
-
         public void setIcon(String icon) { this.icon = icon; }
-
         public int getCode() { return code; }
-
         public void setCode(int code) { this.code = code; }
 
         @Override
@@ -47,6 +44,7 @@ public class WeatherData {
         }
     }
 
+    // 2. DayData
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class DayData {
 
@@ -87,6 +85,7 @@ public class WeatherData {
         }
     }
 
+    // 3. HourData
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class HourData {
 
@@ -154,6 +153,7 @@ public class WeatherData {
         }
     }
 
+    // 4. Astro
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class Astro {
 
@@ -185,14 +185,15 @@ public class WeatherData {
         }
     }
 
+    // 5. ForecastDay
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class ForecastDay {
 
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-        private Date date;
-        private DayData day;
-        private Astro astro;
-        private HourData[] hour;
+        private Date date;          // string
+        private DayData day;        // object
+        private Astro astro;        // object
+        private HourData[] hour;    // array of objects
 
         public ForecastDay() {
         }
@@ -231,6 +232,7 @@ public class WeatherData {
         }
     }
 
+    // 6. Forecast
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class Forecast {
 
@@ -254,10 +256,13 @@ public class WeatherData {
         }
     }
 
+    // 7. Location
     @JsonIgnoreProperties(ignoreUnknown = true)
     static class Location {
 
         private String name;
+        private String region;
+        private String country;
 
         public Location() {
         }
@@ -270,6 +275,9 @@ public class WeatherData {
 
         public void setName(String name) { this.name = name; }
 
+        public String getRegion() { return region; }
+        public String getCountry() { return country; }
+
         @Override
         public String toString() {
             return "Location{" +
@@ -281,6 +289,7 @@ public class WeatherData {
     private Location location;
     private Forecast forecast;
 
+    // constructor
     public WeatherData() {
     }
 
